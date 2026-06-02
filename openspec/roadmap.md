@@ -22,10 +22,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 
 ## Semana 1 — Fundação
 
-### `[wip]` bootstrap-api
+### `[done]` bootstrap-api
 > Aplicação FastAPI rodando, conexão PostgreSQL via SQLAlchemy 2.x + Alembic configurado, health checks (`/health` e `/health/db`), CORS para o frontend, estrutura de pastas modular, ruff configurado.
 
-**Pasta:** `changes/bootstrap-api/`
+**Pasta:** `changes/archive/bootstrap-api/`
 **Closes:** #3, #4
 
 ### `[todo]` models-base
