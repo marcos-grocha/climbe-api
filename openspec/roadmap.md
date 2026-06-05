@@ -7,8 +7,8 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 - A lista abaixo mostra a **ordem aproximada** das próximas propostas.
 - Cada capability vira uma pasta `openspec/changes/<id>/` completa (com `proposal.md`, `design.md`, `tasks.md`, `specs/`) **só quando for hora de implementar** — não criamos tudo upfront.
 - Mudanças de prioridade são esperadas. Atualize este arquivo quando isso acontecer.
-- O campo **`Closes:`** de cada capability lista as issues do GitHub Projects que serão fechadas quando a PR daquela capability for mergeada. Use os números aqui ao montar o `Closes #N` na PR (ver [AGENTS.md > Ao finalizar uma implementação]).
-- Os números abaixo refletem a numeração da lista original de 44 issues sugeridas. Se as suas issues no GitHub tiverem outros números, ajuste aqui.
+- O campo **`Closes:`** de cada capability lista as issues do GitHub que serão fechadas quando a PR daquela capability for mergeada. Use os números aqui ao montar o `Closes #N` na PR (ver [AGENTS.md > Ao finalizar uma implementação]).
+- Os números de `Closes:` estão **reconciliados com os números reais do GitHub** (a numeração é compartilhada com PRs, então diverge da lista original de 44).
 
 ## Convenção de status
 
@@ -28,25 +28,26 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 **Pasta:** `changes/archive/bootstrap-api/`
 **Closes:** #3, #4
 
-### `[todo]` models-base
+### `[done]` models-base
 > Models SQLAlchemy de **todas** as entidades do diagrama ER (Usuario, Cargo, Empresa, Servico, EmpresaServico, Proposta, Contrato, Documento, Reuniao, ParticipanteReuniao, Planilha, Relatorio, Permissao, UsuarioPermissao, Notificacao). Primeira migration Alembic gerada com autogenerate. Seeds de cargos e serviços iniciais.
 
-**Closes:** #5, #43
+**Pasta:** `changes/archive/models-base/`
+**Closes:** #5, #23
 
 ### `[todo]` auth-jwt
 > Login por email/senha. Hash bcrypt via passlib. JWT HS256 com expiração 60min. Endpoints `/auth/login`, `/auth/me`. Dependency `get_current_user`. RBAC básico com `require_role(["admin", "analista"])`. Exception handlers globais para 401/403.
 
-**Closes:** #6, #10
+**Closes:** #8, #12
 
 ### `[todo]` crud-usuarios
 > CRUD de usuário (`/usuarios`). Validação de CPF com dígito verificador. Email único. Vínculo com cargo. Apenas admin cadastra. Endpoint de mudança de senha. Soft delete via campo `situacao` (ativo/inativo).
 
-**Closes:** #7, #8
+**Closes:** #9, #10
 
 ### `[todo]` crud-empresas
 > CRUD de empresa (`/empresas`). Validação de CNPJ (dígito verificador + unicidade no banco). Endereço completo (logradouro, número, bairro, cidade, UF, CEP). Dados do representante legal (nome, CPF, contato). Vínculo com serviços contratados (M:N via `empresa_servico`).
 
-**Closes:** #9
+**Closes:** #11
 
 ---
 
@@ -55,22 +56,22 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 ### `[todo]` crud-propostas
 > CRUD de proposta comercial. Status: `rascunho` → `enviada` → `aprovada`/`recusada`. Apenas cargos autorizados criam (CMO, CSO, CEO, Analista, Contador). Endpoints `/propostas/{id}/aprovar` e `/propostas/{id}/recusar` com permissionamento. Notificação automática aos envolvidos.
 
-**Closes:** #19
+**Closes:** #13
 
 ### `[todo]` crud-contratos
 > Contrato gerado automaticamente quando proposta é aprovada pela Compliance (signal/event handler). Campos: `data_inicio`, `data_fim`, `prazo_entrega` (variável, definido pelo Analista Sênior — conforme Novo Fluxograma). Flag `recorrente` para serviços CFO/BPO. Status: `ativo`, `encerrado`.
 
-**Closes:** #20
+**Closes:** #14
 
 ### `[todo]` documentos
 > Upload de documentos (multipart/form-data). Storage local em `uploads/{contrato_id}/{tipo}/`. Tipos obrigatórios: Balanço, DRE, planilhas gerenciais, CNPJ, Contrato Social. Validação pelo analista responsável (`/documentos/{id}/validar` e `/reprovar`). Status: `pendente` → `valido`/`invalido` (com observação).
 
-**Closes:** #21, #22
+**Closes:** #15, #16
 
 ### `[todo]` auth-google
 > OAuth 2.0 com Google (Authorization Code Flow com PKCE). Endpoint `/auth/google/callback`. Se usuário não existe, cria com status `pendente_aprovacao` e notifica admin via email + in-app. Armazena `access_token` e `refresh_token` criptografados (Fernet) — serão usados nas integrações Google posteriores.
 
-**Closes:** #23
+**Closes:** #17
 
 ---
 
@@ -79,22 +80,22 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 ### `[todo]` agendamento-reunioes
 > CRUD de reunião (`/reunioes`). Verificação de disponibilidade dos participantes e da sala (para presencial). Integração com Google Calendar: cria evento real no Calendar do organizador usando o `access_token` armazenado em `auth-google`. Envia convites.
 
-**Closes:** #29
+**Closes:** #19
 
 ### `[todo]` google-drive
 > Quando contrato é criado, cria pasta no Drive (`/Climbe/Contratos/{empresa}/{contrato_id}/`). Upload dos documentos do contrato pra essa pasta. Permissões de leitura para o analista chefe e participantes do contrato.
 
-**Closes:** #31
+**Closes:** #20
 
 ### `[todo]` notificacoes
 > Endpoints `/notificacoes` (lista do usuário logado) e `/notificacoes/{id}/lida`. Trigger automático em eventos: nova proposta, contrato aprovado, doc inválido, reunião marcada, vencimento próximo de qualquer prazo. Envio de email — primeira tentativa via Gmail API (com OAuth do usuário), fallback SMTP do Gmail com App Password.
 
-**Closes:** #30, #32
+**Closes:** #21, #22
 
 ### `[todo]` relatorios-pdf
 > Criação de relatório de contrato. Status: `pendente` → `revisao_senior` → `aprovado` (conforme Novo Fluxograma, há revisão do Analista Sênior). Geração de PDF server-side com WeasyPrint ou ReportLab. Anexa ao contrato. Endpoint `/relatorios/{id}/pdf` para download.
 
-**Closes:** #44
+**Closes:** #24
 
 ---
 
@@ -111,18 +112,12 @@ Se o tempo apertar, estas ficam pra fora:
 
 ## Issues que NÃO fecham via capability do backend
 
-Algumas issues da lista original não correspondem 1:1 a uma capability do backend e devem ser tratadas separadamente:
-
 - **#1** Criar repositório `climbe-api` no GitHub — já feito manualmente
-- **#2** Configurar Google Cloud Console — pré-requisito externo (não é código). Fechar manualmente quando concluir
-- **#11 a #18** — issues do frontend (não pertencem ao backend)
-- **#24 a #28** — issues do frontend
-- **#33 a #37** — issues do frontend
-- **#38** Teste manual end-to-end — fechar manualmente após validação
-- **#39** Atualizar README de execução — fechar com a PR que finalizar
-- **#40** Deploy mínimo — capability avulsa de operação (não está no roadmap)
-- **#41** Vídeo demo de backup — manual
-- **#42** Preparar slides — manual
+- **#2** Configurar Google Cloud Console — pré-requisito externo (não é código); fechar manualmente quando concluir
+- **Issues do frontend** — ficam no repositório `climbe-app`, não neste
+- **Itens manuais/operacionais** da lista original (teste e2e, README de execução, deploy mínimo, vídeo demo, slides) — não foram criados como issues neste repo; tratar manualmente se necessário
+
+> No GitHub da `climbe-api` existem hoje as issues **#1–#5**, **#8–#17** e **#19–#24** (os números **#6, #7 e #18 são PRs**, não issues). Todas as issues de backend abertas estão cobertas pelas capabilities acima.
 
 ---
 
