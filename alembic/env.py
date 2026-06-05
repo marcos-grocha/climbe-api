@@ -5,11 +5,9 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
+import app.models  # noqa: F401  -- importa os models para registrá-los em Base.metadata
 from app.config import settings
 from app.database import Base
-
-# Quando houver models (proposta models-base), importe-os aqui para que o
-# autogenerate detecte as tabelas, por exemplo: ``from app import models``.
 
 # Objeto Config do Alembic — dá acesso aos valores do alembic.ini.
 config = context.config
