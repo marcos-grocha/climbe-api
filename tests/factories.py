@@ -3,7 +3,7 @@ from __future__ import annotations
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models import Cargo, Usuario
+from app.models import Cargo, Empresa, Usuario
 from app.utils.security import create_access_token, hash_password
 
 
@@ -30,6 +30,13 @@ def criar_usuario(
     db.add(usuario)
     db.flush()
     return usuario
+
+
+def criar_empresa(db: Session, *, cnpj: str, razao_social: str = "Empresa X") -> Empresa:
+    empresa = Empresa(razao_social=razao_social, cnpj=cnpj)
+    db.add(empresa)
+    db.flush()
+    return empresa
 
 
 def auth_header(usuario: Usuario) -> dict[str, str]:
