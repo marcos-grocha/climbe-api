@@ -25,6 +25,7 @@ class Usuario(Base, TimestampMixin):
     email: Mapped[str] = mapped_column(String(255), unique=True)
     contato: Mapped[str] = mapped_column(String(50))
     situacao: Mapped[str] = mapped_column(String(255), default="ativo", server_default="ativo")
+    papel: Mapped[str] = mapped_column(String(255), default="analista", server_default="analista")
     senha_hash: Mapped[str] = mapped_column(String(60))
 
     cargo: Mapped[Cargo] = relationship(back_populates="usuarios")

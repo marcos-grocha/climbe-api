@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 60
 
+    # Admin inicial (criado pela migration de seed da auth-jwt)
+    admin_email: str = "admin@climbe.local"
+    admin_password: str = "climbe-admin-trocar"
+
     # Google OAuth
     google_client_id: str = ""
     google_client_secret: str = ""

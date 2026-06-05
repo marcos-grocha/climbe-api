@@ -34,9 +34,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 **Pasta:** `changes/archive/models-base/`
 **Closes:** #5, #23
 
-### `[todo]` auth-jwt
-> Login por email/senha. Hash bcrypt via passlib. JWT HS256 com expiração 60min. Endpoints `/auth/login`, `/auth/me`. Dependency `get_current_user`. RBAC básico com `require_role(["admin", "analista"])`. Exception handlers globais para 401/403.
+### `[done]` auth-jwt
+> Login por email/senha. Hash bcrypt. JWT HS256 com expiração 60min. Endpoints `/auth/login`, `/auth/me`. Dependency `get_current_user`. RBAC básico com `require_role(["admin", "analista"])`. Exception handlers globais para 401/403.
 
+**Pasta:** `changes/archive/auth-jwt/`
 **Closes:** #8, #12
 
 ### `[todo]` crud-usuarios

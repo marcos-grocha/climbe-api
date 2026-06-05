@@ -6,7 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.database import engine
+from app.database import engine, get_db
 from app.main import app
 
 
@@ -30,3 +30,17 @@ def db_session() -> Iterator[Session]:
         session.close()
         transaction.rollback()
         connection.close()
+
+
+@pytest.fixture
+def client_db(db_session: Session) -> Iterator[TestClient]:
+    """TestClient cujo `get_db` usa a sessão de teste — dados criados no teste ficam
+    visíveis aos endpoints, e tudo é revertido ao fim."""
+
+    def _override() -> Iterator[Session]:
+        yield db_session
+
+    app.dependency_overrides[get_db] = _override
+    with TestClient(app) as test_client:
+        yield test_client
+    app.dependency_overrides.clear()
