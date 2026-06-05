@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from app.models.documento import Documento
     from app.models.proposta import Proposta
     from app.models.reuniao import Reuniao
+    from app.models.servico import Servico
 
 
 class Empresa(Base, TimestampMixin):
@@ -36,3 +37,5 @@ class Empresa(Base, TimestampMixin):
     propostas: Mapped[list[Proposta]] = relationship(back_populates="empresa")
     documentos: Mapped[list[Documento]] = relationship(back_populates="empresa")
     reunioes: Mapped[list[Reuniao]] = relationship(back_populates="empresa")
+    # Leitura M:N dos serviços contratados (escrita é feita via EmpresaServico no service).
+    servicos: Mapped[list[Servico]] = relationship(secondary="empresa_servico", viewonly=True)

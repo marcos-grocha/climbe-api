@@ -46,9 +46,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 **Pasta:** `changes/archive/crud-usuarios/`
 **Closes:** #9, #10
 
-### `[todo]` crud-empresas
+### `[done]` crud-empresas
 > CRUD de empresa (`/empresas`). Validação de CNPJ (dígito verificador + unicidade no banco). Endereço completo (logradouro, número, bairro, cidade, UF, CEP). Dados do representante legal (nome, CPF, contato). Vínculo com serviços contratados (M:N via `empresa_servico`).
 
+**Pasta:** `changes/archive/crud-empresas/`
 **Closes:** #11
 
 ---
