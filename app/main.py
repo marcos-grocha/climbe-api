@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 
 from app.config import settings
 from app.exceptions import AppError
-from app.routers import auth, health
+from app.routers import auth, cargos, health, usuarios
 
 app = FastAPI(title="Climbe API")
 
@@ -30,3 +30,5 @@ async def handle_app_error(request: Request, exc: AppError) -> JSONResponse:
 
 app.include_router(health.router)
 app.include_router(auth.router)
+app.include_router(cargos.router)
+app.include_router(usuarios.router)

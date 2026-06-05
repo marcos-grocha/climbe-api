@@ -40,9 +40,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 **Pasta:** `changes/archive/auth-jwt/`
 **Closes:** #8, #12
 
-### `[todo]` crud-usuarios
+### `[done]` crud-usuarios
 > CRUD de usuário (`/usuarios`). Validação de CPF com dígito verificador. Email único. Vínculo com cargo. Apenas admin cadastra. Endpoint de mudança de senha. Soft delete via campo `situacao` (ativo/inativo).
 
+**Pasta:** `changes/archive/crud-usuarios/`
 **Closes:** #9, #10
 
 ### `[todo]` crud-empresas

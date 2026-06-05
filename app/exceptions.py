@@ -38,3 +38,45 @@ class SemPermissaoError(AppError):
     status_code = status.HTTP_403_FORBIDDEN
     code = "AUTH_SEM_PERMISSAO"
     detail = "Você não tem permissão para esta ação"
+
+
+class CpfInvalidoError(AppError):
+    status_code = status.HTTP_422_UNPROCESSABLE_CONTENT
+    code = "CPF_INVALIDO"
+    detail = "CPF inválido"
+
+
+class EmailDuplicadoError(AppError):
+    status_code = status.HTTP_409_CONFLICT
+    code = "USUARIO_EMAIL_DUPLICADO"
+    detail = "Já existe um usuário com este email"
+
+
+class CpfDuplicadoError(AppError):
+    status_code = status.HTTP_409_CONFLICT
+    code = "USUARIO_CPF_DUPLICADO"
+    detail = "Já existe um usuário com este CPF"
+
+
+class UsuarioNaoEncontradoError(AppError):
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "USUARIO_NAO_ENCONTRADO"
+    detail = "Usuário não encontrado"
+
+
+class CargoNaoEncontradoError(AppError):
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "CARGO_NAO_ENCONTRADO"
+    detail = "Cargo não encontrado"
+
+
+class CargoEmUsoError(AppError):
+    status_code = status.HTTP_409_CONFLICT
+    code = "CARGO_EM_USO"
+    detail = "Cargo está em uso por algum usuário"
+
+
+class SenhaAtualIncorretaError(AppError):
+    status_code = status.HTTP_400_BAD_REQUEST
+    code = "SENHA_ATUAL_INCORRETA"
+    detail = "Senha atual incorreta"
