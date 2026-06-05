@@ -28,9 +28,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 **Pasta:** `changes/archive/bootstrap-api/`
 **Closes:** #3, #4
 
-### `[wip]` models-base
+### `[done]` models-base
 > Models SQLAlchemy de **todas** as entidades do diagrama ER (Usuario, Cargo, Empresa, Servico, EmpresaServico, Proposta, Contrato, Documento, Reuniao, ParticipanteReuniao, Planilha, Relatorio, Permissao, UsuarioPermissao, Notificacao). Primeira migration Alembic gerada com autogenerate. Seeds de cargos e serviços iniciais.
 
+**Pasta:** `changes/archive/models-base/`
 **Closes:** #5, #23
 
 ### `[todo]` auth-jwt
