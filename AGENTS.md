@@ -23,7 +23,7 @@ Documentos de referência (no workspace local, fora do repo):
 | Migrations | Alembic |
 | Validação | Pydantic v2 |
 | Banco | PostgreSQL 16 (Docker) |
-| Auth | python-jose (JWT) + passlib (bcrypt) |
+| Auth | python-jose (JWT) + bcrypt |
 | Google APIs | google-api-python-client |
 | Testes | pytest |
 | Lint/format | ruff |
@@ -129,7 +129,7 @@ Contabilidade, Avaliações (Valuation), BPO Financeiro, CFO sob Demanda, M&A.
 
 ## Segurança
 
-- Senhas: hash com `bcrypt` via `passlib`. **Nunca em texto plano**.
+- Senhas: hash com `bcrypt` (lib `bcrypt` direta, sem passlib). **Nunca em texto plano**.
 - JWT: HS256, expira em 60min por padrão
 - OAuth 2.0 Google: Authorization Code Flow com PKCE
 - Tokens sensíveis (Google): armazenar criptografados

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.routers import health
+from app.exceptions import AppError
+from app.routers import auth, health
 
 app = FastAPI(title="Climbe API")
 
@@ -16,4 +18,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.exception_handler(AppError)
+async def handle_app_error(request: Request, exc: AppError) -> JSONResponse:
+    """Converte erros de aplicação no padrão `{detail, code}`."""
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail, "code": exc.code},
+    )
+
+
 app.include_router(health.router)
+app.include_router(auth.router)

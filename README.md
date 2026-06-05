@@ -11,7 +11,7 @@ Desenvolvida com **Spec-Driven Development** usando OpenSpec — propostas, desi
 - **SQLAlchemy** 2.x + **Alembic** — ORM e migrations
 - **PostgreSQL** 16 — banco (rodando em Docker)
 - **Pydantic** v2 — validação e schemas
-- **python-jose** + **passlib** — JWT e hash de senha
+- **python-jose** + **bcrypt** — JWT e hash de senha
 - **google-api-python-client** — Drive, Calendar, Gmail
 - **pytest** — testes
 
