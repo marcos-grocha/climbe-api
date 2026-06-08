@@ -110,3 +110,21 @@ class ServicoNaoEncontradoError(AppError):
     status_code = status.HTTP_404_NOT_FOUND
     code = "SERVICO_NAO_ENCONTRADO"
     detail = "Serviço não encontrado"
+
+
+class PropostaNaoEncontradaError(AppError):
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "PROPOSTA_NAO_ENCONTRADA"
+    detail = "Proposta não encontrada"
+
+
+class PropostaTransicaoInvalidaError(AppError):
+    status_code = status.HTTP_409_CONFLICT
+    code = "PROPOSTA_TRANSICAO_INVALIDA"
+    detail = "Transição de status inválida para a proposta"
+
+
+class PropostaComContratoError(AppError):
+    status_code = status.HTTP_409_CONFLICT
+    code = "PROPOSTA_COM_CONTRATO"
+    detail = "Proposta não pode ser removida porque já possui contrato"
