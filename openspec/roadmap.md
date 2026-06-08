@@ -56,9 +56,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 
 ## Semana 2 — Núcleo do negócio
 
-### `[todo]` crud-propostas
+### `[done]` crud-propostas
 > CRUD de proposta comercial. Status: `rascunho` → `enviada` → `aprovada`/`recusada`. Apenas cargos autorizados criam (CMO, CSO, CEO, Analista, Contador). Endpoints `/propostas/{id}/aprovar` e `/propostas/{id}/recusar` com permissionamento. Notificação automática aos envolvidos.
 
+**Pasta:** `changes/archive/crud-propostas/`
 **Closes:** #13
 
 ### `[todo]` crud-contratos
