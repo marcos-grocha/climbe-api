@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, String
+from sqlalchemy import ForeignKey, String, false
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -25,6 +25,8 @@ class Contrato(Base, TimestampMixin):
     data_inicio: Mapped[date | None] = mapped_column()
     data_fim: Mapped[date | None] = mapped_column()
     status: Mapped[str] = mapped_column(String(255), default="ativo", server_default="ativo")
+    prazo_entrega: Mapped[date | None] = mapped_column()
+    recorrente: Mapped[bool] = mapped_column(default=False, server_default=false())
 
     proposta: Mapped[Proposta] = relationship(back_populates="contrato")
     planilhas: Mapped[list[Planilha]] = relationship(back_populates="contrato")
