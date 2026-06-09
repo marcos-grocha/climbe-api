@@ -128,3 +128,15 @@ class PropostaComContratoError(AppError):
     status_code = status.HTTP_409_CONFLICT
     code = "PROPOSTA_COM_CONTRATO"
     detail = "Proposta não pode ser removida porque já possui contrato"
+
+
+class ContratoNaoEncontradoError(AppError):
+    status_code = status.HTTP_404_NOT_FOUND
+    code = "CONTRATO_NAO_ENCONTRADO"
+    detail = "Contrato não encontrado"
+
+
+class ContratoTransicaoInvalidaError(AppError):
+    status_code = status.HTTP_409_CONFLICT
+    code = "CONTRATO_TRANSICAO_INVALIDA"
+    detail = "Transição de status inválida para o contrato"

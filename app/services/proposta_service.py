@@ -11,6 +11,7 @@ from app.exceptions import (
 )
 from app.models import Proposta
 from app.schemas.proposta import PropostaCreate, PropostaUpdate
+from app.services import contrato_service
 from app.services.empresa_service import obter_empresa
 
 # Transições de status permitidas (máquina de estados da proposta).
@@ -59,6 +60,8 @@ def transicionar(db: Session, id_proposta: int, novo_status: str) -> Proposta:
     if novo_status not in _TRANSICOES.get(proposta.status, set()):
         raise PropostaTransicaoInvalidaError
     proposta.status = novo_status
+    if novo_status == "aprovada":
+        contrato_service.criar_para_proposta(db, proposta)
     db.commit()
     db.refresh(proposta)
     return proposta

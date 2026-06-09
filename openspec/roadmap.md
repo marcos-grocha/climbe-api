@@ -62,9 +62,10 @@ Lista de capabilities planejadas para a API. **Não são specs detalhadas** — 
 **Pasta:** `changes/archive/crud-propostas/`
 **Closes:** #13
 
-### `[todo]` crud-contratos
+### `[done]` crud-contratos
 > Contrato gerado automaticamente quando proposta é aprovada pela Compliance (signal/event handler). Campos: `data_inicio`, `data_fim`, `prazo_entrega` (variável, definido pelo Analista Sênior — conforme Novo Fluxograma). Flag `recorrente` para serviços CFO/BPO. Status: `ativo`, `encerrado`.
 
+**Pasta:** `changes/archive/crud-contratos/`
 **Closes:** #14
 
 ### `[todo]` documentos
