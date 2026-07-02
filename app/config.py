@@ -50,6 +50,16 @@ class Settings(BaseSettings):
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
 
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _force_psycopg_driver(cls, value: str) -> str:
+        # Provedores (Render, Heroku, etc.) entregam a URL como `postgresql://`,
+        # que o SQLAlchemy mapeia para o psycopg2 — não instalado aqui.
+        # Normalizamos para o psycopg 3, que é o driver do projeto.
+        if isinstance(value, str) and value.startswith("postgresql://"):
+            return value.replace("postgresql://", "postgresql+psycopg://", 1)
+        return value
+
 
 @lru_cache
 def get_settings() -> Settings:
